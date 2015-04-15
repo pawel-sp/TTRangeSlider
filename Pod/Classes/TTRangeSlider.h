@@ -57,4 +57,7 @@ IB_DESIGNABLE
  */
 @property (nonatomic, assign) IBInspectable BOOL disableRange;
 
+@property (nonatomic, strong, readonly) CALayer *leftHandle;
+@property (nonatomic, strong, readonly) CALayer *rightHandle;
+
 @end

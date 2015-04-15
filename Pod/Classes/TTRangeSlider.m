@@ -12,9 +12,9 @@ const float HANDLE_DIAMETER = 16;
 
 @property (nonatomic, strong) CALayer *sliderLine;
 
-@property (nonatomic, strong) CALayer *leftHandle;
+@property (nonatomic, strong, readwrite) CALayer *leftHandle;
 @property (nonatomic, assign) BOOL leftHandleSelected;
-@property (nonatomic, strong) CALayer *rightHandle;
+@property (nonatomic, strong, readwrite) CALayer *rightHandle;
 @property (nonatomic, assign) BOOL rightHandleSelected;
 
 @property (nonatomic, strong) CATextLayer *minLabel;
