@@ -312,30 +312,37 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
 #pragma mark - Animation
 - (void)animateHandle:(CALayer*)handle withSelection:(BOOL)selected {
-    if (selected){
-        [CATransaction begin];
-        [CATransaction setAnimationDuration:0.3];
-        [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
-        handle.transform = CATransform3DMakeScale(1.7, 1.7, 1);
-        
-        //the label above the handle will need to move too if the handle changes size
-        [self updateLabelPositions];
-        
-        [CATransaction setCompletionBlock:^{
-        }];
-        [CATransaction commit];
-
-    } else {
-        [CATransaction begin];
-        [CATransaction setAnimationDuration:0.3];
-        [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
-        handle.transform = CATransform3DIdentity;
-        
-        //the label above the handle will need to move too if the handle changes size
-        [self updateLabelPositions];
-        
-        [CATransaction commit];
+    if (self.delegate) {
+        if (selected) {
+            [self.delegate rangeSlider:self didStartTrackingWithHandle:handle];
+        } else {
+            [self.delegate rangeSlider:self didEndTrackingWithHandle:handle];
+        }
     }
+//    if (selected){
+//        [CATransaction begin];
+//        [CATransaction setAnimationDuration:0.3];
+//        [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
+//        handle.transform = CATransform3DMakeScale(1.7, 1.7, 1);
+//        
+//        //the label above the handle will need to move too if the handle changes size
+//        [self updateLabelPositions];
+//        
+//        [CATransaction setCompletionBlock:^{
+//        }];
+//        [CATransaction commit];
+//
+//    } else {
+//        [CATransaction begin];
+//        [CATransaction setAnimationDuration:0.3];
+//        [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
+//        handle.transform = CATransform3DIdentity;
+//        
+//        //the label above the handle will need to move too if the handle changes size
+//        [self updateLabelPositions];
+//        
+//        [CATransaction commit];
+//    }
 }
 
 #pragma mark - Calculating nearest handle to point

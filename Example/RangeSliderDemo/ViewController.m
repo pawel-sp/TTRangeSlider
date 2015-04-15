@@ -66,4 +66,20 @@
     }
 }
 
+-(void)rangeSlider:(TTRangeSlider *)sender didStartTrackingWithHandle:(CALayer *)handle {
+    [CATransaction begin];
+    [CATransaction setAnimationDuration:0.3];
+    [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
+    handle.transform = CATransform3DMakeScale(1.7, 1.7, 1);
+    [CATransaction commit];
+}
+
+-(void)rangeSlider:(TTRangeSlider *)sender didEndTrackingWithHandle:(CALayer*)handle {
+    [CATransaction begin];
+    [CATransaction setAnimationDuration:0.3];
+    [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
+    handle.transform = CATransform3DIdentity;
+    [CATransaction commit];
+}
+
 @end
