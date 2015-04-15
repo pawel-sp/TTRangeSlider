@@ -17,9 +17,7 @@
 @implementation ViewController
 
 #warning Add label's animation
-#warning Add label's font attributes customizing
 #warning Fix handle's position after touch
-#warning Add custom font with size
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -36,6 +34,9 @@
     self.rangeSlider.leftHandle.borderColor = [UIColor greenColor].CGColor;
     self.rangeSlider.handleLabelVerticalOffset = 20.0f;
     self.rangeSlider.minSpacingBetweenLabels = 10.0f;
+    self.rangeSlider.minLabel.fontSize = 25.0f;
+    self.rangeSlider.minLabel.frame = CGRectMake(0, 0, 74, 25);
+    self.rangeSlider.minLabel.font = CFBridgingRetain(@"Futura-Medium");
     
     //currency range slider
     self.rangeSliderCurrency.delegate = self;
