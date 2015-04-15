@@ -12,7 +12,7 @@
 @protocol TTRangeSliderDelegate <NSObject>
 
 -(void)rangeSlider:(TTRangeSlider *)sender didChangeSelectedMinimumValue:(float)selectedMinimum andMaximumValue:(float)selectedMaximum;
--(void)rangeSlider:(TTRangeSlider *)sender didStartTrackingWithHandle:(CALayer*)handle;
--(void)rangeSlider:(TTRangeSlider *)sender didEndTrackingWithHandle:(CALayer*)handle;
+-(void)rangeSlider:(TTRangeSlider *)sender didStartTrackingWithHandle:(CALayer*)handle andTextLayer:(CATextLayer*)textLayer;
+-(void)rangeSlider:(TTRangeSlider *)sender didEndTrackingWithHandle:(CALayer*)handle andTextLayer:(CATextLayer*)textLayer;
 
 @end
