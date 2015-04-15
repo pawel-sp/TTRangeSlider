@@ -17,8 +17,8 @@ const float HANDLE_DIAMETER = 16;
 @property (nonatomic, strong, readwrite) CALayer *rightHandle;
 @property (nonatomic, assign) BOOL rightHandleSelected;
 
-@property (nonatomic, strong) CATextLayer *minLabel;
-@property (nonatomic, strong) CATextLayer *maxLabel;
+@property (nonatomic, strong, readwrite) CATextLayer *minLabel;
+@property (nonatomic, strong, readwrite) CATextLayer *maxLabel;
 
 @property (nonatomic, strong) NSNumberFormatter *decimalNumberFormatter; // Used to format values if formatType is YLRangeSliderFormatTypeDecimal
 
@@ -85,9 +85,14 @@ static const CGFloat kLabelsFontSize = 12.0f;
     [self refresh];
 }
 
+- (void)assignDefaultValues {
+    self.handleLabelVerticalOffset = 8.0f;
+    self.minSpacingBetweenLabels = 8.0f;
+}
+
 - (void)layoutSubviews {
     [super layoutSubviews];
-
+    NSLog(@"layout subviews");
     //positioning for the slider line
     float barSidePadding = 16.0f;
     CGRect currentFrame = self.frame;
@@ -107,6 +112,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     if(self)
     {
         [self initialiseControl];
+        [self assignDefaultValues];
     }
     return self;
 }
@@ -118,6 +124,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     if (self)
     {
         [self initialiseControl];
+        [self assignDefaultValues];
     }
     
     return self;
@@ -176,14 +183,12 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
 - (void)updateLabelPositions {
     //the centre points for the labels are X = the same x position as the relevant handle. Y = the y position of the handle minus half the height of the text label, minus some padding.
-    int padding = 8;
-    float minSpacingBetweenLabels = 8.0f;
     
     CGPoint leftHandleCentre = [self getCentreOfRect:self.leftHandle.frame];
-    CGPoint newMinLabelCenter = CGPointMake(leftHandleCentre.x, self.leftHandle.frame.origin.y - (self.minLabel.frame.size.height/2) - padding);
+    CGPoint newMinLabelCenter = CGPointMake(leftHandleCentre.x, self.leftHandle.frame.origin.y - (self.minLabel.frame.size.height/2) - self.handleLabelVerticalOffset);
     
     CGPoint rightHandleCentre = [self getCentreOfRect:self.rightHandle.frame];
-    CGPoint newMaxLabelCenter = CGPointMake(rightHandleCentre.x, self.rightHandle.frame.origin.y - (self.maxLabel.frame.size.height/2) - padding);
+    CGPoint newMaxLabelCenter = CGPointMake(rightHandleCentre.x, self.rightHandle.frame.origin.y - (self.maxLabel.frame.size.height/2) - self.handleLabelVerticalOffset);
     
     CGSize minLabelTextSize = [self.minLabel.string sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:kLabelsFontSize]}];
     CGSize maxLabelTextSize = [self.maxLabel.string sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:kLabelsFontSize]}];
@@ -192,20 +197,20 @@ static const CGFloat kLabelsFontSize = 12.0f;
     float newRightMostXInMinLabel = newMinLabelCenter.x + minLabelTextSize.width/2;
     float newSpacingBetweenTextLabels = newLeftMostXInMaxLabel - newRightMostXInMinLabel;
     
-    if (newSpacingBetweenTextLabels > minSpacingBetweenLabels) {
+    if (newSpacingBetweenTextLabels > self.minSpacingBetweenLabels) {
         self.minLabel.position = newMinLabelCenter;
         self.maxLabel.position = newMaxLabelCenter;
     }
     else {
-        newMinLabelCenter = CGPointMake(self.minLabel.position.x, self.leftHandle.frame.origin.y - (self.minLabel.frame.size.height/2) - padding);
-        newMaxLabelCenter = CGPointMake(self.maxLabel.position.x, self.rightHandle.frame.origin.y - (self.maxLabel.frame.size.height/2) - padding);
+        newMinLabelCenter = CGPointMake(self.minLabel.position.x, self.leftHandle.frame.origin.y - (self.minLabel.frame.size.height/2) - self.handleLabelVerticalOffset);
+        newMaxLabelCenter = CGPointMake(self.maxLabel.position.x, self.rightHandle.frame.origin.y - (self.maxLabel.frame.size.height/2) - self.handleLabelVerticalOffset);
         self.minLabel.position = newMinLabelCenter;
         self.maxLabel.position = newMaxLabelCenter;
         
         //Update x if they are still in the original position
         if (self.minLabel.position.x == self.maxLabel.position.x && self.leftHandle != nil) {
             self.minLabel.position = CGPointMake(leftHandleCentre.x, self.minLabel.position.y);
-            self.maxLabel.position = CGPointMake(leftHandleCentre.x + self.minLabel.frame.size.width/2 + minSpacingBetweenLabels + self.maxLabel.frame.size.width/2, self.maxLabel.position.y);
+            self.maxLabel.position = CGPointMake(leftHandleCentre.x + self.minLabel.frame.size.width/2 + self.minSpacingBetweenLabels + self.maxLabel.frame.size.width/2, self.maxLabel.position.y);
         }
     }
 }
@@ -243,6 +248,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
 }
 
 - (void)refresh {
+    NSLog(@"refresh");
     //ensure the minimum and maximum selected values are within range. Access the values directly so we don't cause this refresh method to be called again (otherwise changing the properties causes a refresh)
     if (self.selectedMinimum < self.minValue){
         _selectedMinimum = self.minValue;

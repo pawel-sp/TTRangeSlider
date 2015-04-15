@@ -16,6 +16,11 @@
 
 @implementation ViewController
 
+#warning Add label's animation
+#warning Add label's font attributes customizing
+#warning Fix handle's position after touch
+#warning Add custom font with size
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -29,6 +34,8 @@
     self.rangeSlider.leftHandle.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.25].CGColor;
     self.rangeSlider.leftHandle.borderWidth = 2.0;
     self.rangeSlider.leftHandle.borderColor = [UIColor greenColor].CGColor;
+    self.rangeSlider.handleLabelVerticalOffset = 20.0f;
+    self.rangeSlider.minSpacingBetweenLabels = 10.0f;
     
     //currency range slider
     self.rangeSliderCurrency.delegate = self;
@@ -58,15 +65,15 @@
 
 #pragma mark TTRangeSliderViewDelegate
 -(void)rangeSlider:(TTRangeSlider *)sender didChangeSelectedMinimumValue:(float)selectedMinimum andMaximumValue:(float)selectedMaximum{
-    if (sender == self.rangeSlider){
-        NSLog(@"Standard slider updated. Min Value: %.0f Max Value: %.0f", selectedMinimum, selectedMaximum);
-    }
-    else if (sender == self.rangeSliderCurrency) {
-        NSLog(@"Currency slider updated. Min Value: %.0f Max Value: %.0f", selectedMinimum, selectedMaximum);
-    }
-    else if (sender == self.rangeSliderCustom){
-        NSLog(@"Custom slider updated. Min Value: %.0f Max Value: %.0f", selectedMinimum, selectedMaximum);
-    }
+//    if (sender == self.rangeSlider){
+//        NSLog(@"Standard slider updated. Min Value: %.0f Max Value: %.0f", selectedMinimum, selectedMaximum);
+//    }
+//    else if (sender == self.rangeSliderCurrency) {
+//        NSLog(@"Currency slider updated. Min Value: %.0f Max Value: %.0f", selectedMinimum, selectedMaximum);
+//    }
+//    else if (sender == self.rangeSliderCustom){
+//        NSLog(@"Custom slider updated. Min Value: %.0f Max Value: %.0f", selectedMinimum, selectedMaximum);
+//    }
 }
 
 -(void)rangeSlider:(TTRangeSlider *)sender didStartTrackingWithHandle:(CALayer *)handle {

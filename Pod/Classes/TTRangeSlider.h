@@ -57,7 +57,23 @@ IB_DESIGNABLE
  */
 @property (nonatomic, assign) IBInspectable BOOL disableRange;
 
+/**
+ * Layers for left and right handle used to select the range on the axis.
+ */
 @property (nonatomic, strong, readonly) CALayer *leftHandle;
 @property (nonatomic, strong, readonly) CALayer *rightHandle;
+
+@property (nonatomic, strong, readonly) CATextLayer *minLabel;
+@property (nonatomic, strong, readonly) CATextLayer *maxLabel;
+
+/**
+ * Default value = 8.0
+ */
+@property (nonatomic) CGFloat handleLabelVerticalOffset;
+
+/**
+ * Default value = 8.0
+ */
+@property (nonatomic) CGFloat minSpacingBetweenLabels;
 
 @end
