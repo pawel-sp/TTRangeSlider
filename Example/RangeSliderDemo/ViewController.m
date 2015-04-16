@@ -74,7 +74,7 @@
 //    else if (sender == self.rangeSliderCustom){
 //        NSLog(@"Custom slider updated. Min Value: %.0f Max Value: %.0f", selectedMinimum, selectedMaximum);
 //    }
-}
+} 
 
 -(void)rangeSlider:(TTRangeSlider *)sender didStartTrackingWithHandle:(CALayer *)handle andTextLayer:(CATextLayer*)textLayer {
     [CATransaction begin];

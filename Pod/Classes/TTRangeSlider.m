@@ -92,7 +92,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    NSLog(@"layout subviews");
+
     //positioning for the slider line
     float barSidePadding = 16.0f;
     CGRect currentFrame = self.frame;
@@ -248,7 +248,6 @@ static const CGFloat kLabelsFontSize = 12.0f;
 }
 
 - (void)refresh {
-    NSLog(@"refresh");
     //ensure the minimum and maximum selected values are within range. Access the values directly so we don't cause this refresh method to be called again (otherwise changing the properties causes a refresh)
     if (self.selectedMinimum < self.minValue){
         _selectedMinimum = self.minValue;
