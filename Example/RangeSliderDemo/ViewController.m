@@ -31,6 +31,22 @@
     self.rangeSlider.leftHandle.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.25].CGColor;
     self.rangeSlider.leftHandle.borderWidth = 2.0;
     self.rangeSlider.leftHandle.borderColor = [UIColor greenColor].CGColor;
+    self.rangeSlider.startTrackingBlock = ^void(CALayer *handle, CATextLayer *textLayer) {
+        [CATransaction begin];
+        [CATransaction setAnimationDuration:0.3];
+        [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
+        handle.transform = CATransform3DMakeScale(1.7, 1.7, 1);
+        textLayer.transform = CATransform3DMakeScale(1.3, 1.3, 1);
+        [CATransaction commit];
+    };
+    self.rangeSlider.endTrackingBlock = ^void(CALayer *handle, CATextLayer *textLayer) {
+        [CATransaction begin];
+        [CATransaction setAnimationDuration:0.3];
+        [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
+        handle.transform = CATransform3DIdentity;
+        textLayer.transform = CATransform3DIdentity;
+        [CATransaction commit];
+    };
 //    self.rangeSlider.handleLabelVerticalOffset = 20.0f;
 //    self.rangeSlider.minSpacingBetweenLabels = 10.0f;
 //    self.rangeSlider.minLabel.fontSize = 25.0f;
@@ -77,21 +93,11 @@
 } 
 
 -(void)rangeSlider:(TTRangeSlider *)sender didStartTrackingWithHandle:(CALayer *)handle andTextLayer:(CATextLayer*)textLayer {
-    [CATransaction begin];
-    [CATransaction setAnimationDuration:0.3];
-    [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
-    handle.transform = CATransform3DMakeScale(1.7, 1.7, 1);
-    textLayer.transform = CATransform3DMakeScale(1.3, 1.3, 1);
-    [CATransaction commit];
+    
 }
 
 -(void)rangeSlider:(TTRangeSlider *)sender didEndTrackingWithHandle:(CALayer*)handle andTextLayer:(CATextLayer*)textLayer {
-    [CATransaction begin];
-    [CATransaction setAnimationDuration:0.3];
-    [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
-    handle.transform = CATransform3DIdentity;
-    textLayer.transform = CATransform3DIdentity;
-    [CATransaction commit];
+    
 }
 
 @end

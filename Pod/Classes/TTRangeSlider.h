@@ -7,6 +7,8 @@
 #import <UIKit/UIKit.h>
 #import "TTRangeSliderDelegate.h"
 
+typedef void(^TTRangeSliderEventBlock)(CALayer *handle, CATextLayer *textLayer);
+
 IB_DESIGNABLE
 @interface TTRangeSlider : UIControl <UIGestureRecognizerDelegate>
 
@@ -65,6 +67,9 @@ IB_DESIGNABLE
 
 @property (nonatomic, strong, readonly) CATextLayer *minLabel;
 @property (nonatomic, strong, readonly) CATextLayer *maxLabel;
+
+@property (nonatomic, strong) TTRangeSliderEventBlock startTrackingBlock;
+@property (nonatomic, strong) TTRangeSliderEventBlock endTrackingBlock;
 
 /**
  * Default value = 8.0
