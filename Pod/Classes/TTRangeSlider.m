@@ -317,19 +317,17 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
 #pragma mark - Animation
 - (void)animateHandle:(CALayer*)handle withSelection:(BOOL)selected {
-    if (self.delegate) {
-        CATextLayer *textLayer = [handle isEqual:self.leftHandle] ? self.minLabel : self.maxLabel;
-        if (selected) {
-            if (self.startTrackingBlock) {
-                self.startTrackingBlock(handle, textLayer);
-            }
-            [self.delegate rangeSlider:self didStartTrackingWithHandle:handle andTextLayer:textLayer];
-        } else {
-            if (self.endTrackingBlock) {
-                self.endTrackingBlock(handle, textLayer);
-            }
-            [self.delegate rangeSlider:self didEndTrackingWithHandle:handle andTextLayer:textLayer];
+    CATextLayer *textLayer = [handle isEqual:self.leftHandle] ? self.minLabel : self.maxLabel;
+    if (selected) {
+        if (self.startTrackingBlock) {
+            self.startTrackingBlock(handle, textLayer);
         }
+        [self.delegate rangeSlider:self didStartTrackingWithHandle:handle andTextLayer:textLayer];
+    } else {
+        if (self.endTrackingBlock) {
+            self.endTrackingBlock(handle, textLayer);
+        }
+        [self.delegate rangeSlider:self didEndTrackingWithHandle:handle andTextLayer:textLayer];
     }
 //    if (selected){
 //        [CATransaction begin];

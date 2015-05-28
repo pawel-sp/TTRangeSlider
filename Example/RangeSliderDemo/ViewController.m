@@ -81,16 +81,16 @@
 
 #pragma mark TTRangeSliderViewDelegate
 -(void)rangeSlider:(TTRangeSlider *)sender didChangeSelectedMinimumValue:(float)selectedMinimum andMaximumValue:(float)selectedMaximum{
-//    if (sender == self.rangeSlider){
-//        NSLog(@"Standard slider updated. Min Value: %.0f Max Value: %.0f", selectedMinimum, selectedMaximum);
-//    }
-//    else if (sender == self.rangeSliderCurrency) {
-//        NSLog(@"Currency slider updated. Min Value: %.0f Max Value: %.0f", selectedMinimum, selectedMaximum);
-//    }
-//    else if (sender == self.rangeSliderCustom){
-//        NSLog(@"Custom slider updated. Min Value: %.0f Max Value: %.0f", selectedMinimum, selectedMaximum);
-//    }
-} 
+    if (sender == self.rangeSlider){
+        NSLog(@"Standard slider updated. Min Value: %.0f Max Value: %.0f", selectedMinimum, selectedMaximum);
+    }
+    else if (sender == self.rangeSliderCurrency) {
+        NSLog(@"Currency slider updated. Min Value: %.0f Max Value: %.0f", selectedMinimum, selectedMaximum);
+    }
+    else if (sender == self.rangeSliderCustom){
+        NSLog(@"Custom slider updated. Min Value: %.0f Max Value: %.0f", selectedMinimum, selectedMaximum);
+    }
+}
 
 -(void)rangeSlider:(TTRangeSlider *)sender didStartTrackingWithHandle:(CALayer *)handle andTextLayer:(CATextLayer*)textLayer {
     
