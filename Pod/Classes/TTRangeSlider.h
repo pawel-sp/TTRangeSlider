@@ -81,4 +81,9 @@ IB_DESIGNABLE
  */
 @property (nonatomic) CGFloat minSpacingBetweenLabels;
 
+/**
+ *  Updates label's position. You can use that for animation's blocks.
+ */
+- (void)updateLabelPositions;
+
 @end
