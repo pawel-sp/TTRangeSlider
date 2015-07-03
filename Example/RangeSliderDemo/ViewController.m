@@ -26,6 +26,7 @@
     self.rangeSlider.maxValue = 200;
     self.rangeSlider.selectedMinimum = 50;
     self.rangeSlider.selectedMaximum = 150;
+    self.rangeSlider.minimumValuesDifference = 10.0f;
     self.rangeSlider.leftHandle.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.25].CGColor;
     self.rangeSlider.leftHandle.borderWidth = 2.0;
     self.rangeSlider.leftHandle.borderColor = [UIColor greenColor].CGColor;

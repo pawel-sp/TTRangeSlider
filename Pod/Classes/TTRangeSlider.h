@@ -37,6 +37,11 @@ IB_DESIGNABLE
 @property (nonatomic, assign) IBInspectable float selectedMaximum;
 
 /**
+ *  Set that value to keep left handle always further then specified value. Default value is 0.
+ */
+@property (nonatomic) IBInspectable float minimumValuesDifference;
+
+/**
  * Each handle in the slider has a label above it showing the current selected value. By default, this is displayed as a decimal format.
  * You can override this default here by supplying your own NSNumberFormatter. For example, you could supply an NSNumberFormatter that has a currency style, or a prefix or suffix.
  * If this property is nil, the default decimal format will be used. Note: If you want no labels at all, set this value to be `(NSNumberFormatter *)[NSNull null]` (as opposed to nil), to specifically mark that you want no labels
